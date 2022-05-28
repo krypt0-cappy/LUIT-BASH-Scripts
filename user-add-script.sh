@@ -2,19 +2,13 @@
 # Purpose - Script to add a user to Linux system including passsword
 # ------------------------------------------------------------------
 # Am i Root user?
-if [ $(id -u) -eq 0 ]; then
-        read -p "Enter username : " username
-        read -s -p "Enter password : " password
-        egrep "^$username" /etc/passwd >/dev/null
-        if [ $? -eq 0 ]; then
-                echo "$username exists!"
-                exit 1
-        else
-                pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
-                useradd -m -p "$pass" "$username"
-                [ $? -eq 0 ] && echo "User has been added to system!" || echo "Failed to add a user!"
-        fi
-else
-        echo "Only root may add a user to the system."
-        exit 2
-fi
+userfile=/home/cloud_user/Projects/LUIT-BASH-Scripts/userlist
+username=$(cat /home/cloud_user/Projects/LUIT-BASH-Scripts/userlist | tr 'A-Z' 'a-z')
+password=$username@123
+for user in $username
+do
+useradd -m $username
+echo $password | passwd --stdin $username
+done
+echo "$(wc -l /home/cloud_user/Projects/LUIT-BASH-Scripts/userlist) users has been created"
+tail -n$(wc -l /home/cloud_user/Projects/LUIT-BASH-Scripts/userlist) /etc/passwd
