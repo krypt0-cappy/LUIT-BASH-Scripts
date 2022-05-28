@@ -1,6 +1,7 @@
 #!/bin/bash
 # Purpose - Script to add a user to Linux system including passsword
-# ------------------------------------------------------------------
+# AUTHOR - TODD CAPUTO - LEVEL UP IN TECH STUDENT
+#  ------------------------------------------------------------------
 # Am i Root user?
 userfile=/home/cloud_user/Projects/LUIT-BASH-Scripts/userlist
 username=$(cat /home/cloud_user/Projects/LUIT-BASH-Scripts/userlist | tr 'A-Z' 'a-z')
